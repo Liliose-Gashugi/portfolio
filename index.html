@@ -439,7 +439,7 @@
 
       <div class="container section-title" data-aos="fade-up">
         <h2>Contact</h2>
-        <p>"We’re Eager to Hear from You – Contact Us Now</p>
+        <p>Looking forward to connecting with you – Send me a message!</p>
       </div>
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -572,6 +572,12 @@
         // Hide loading and show the success message
         document.querySelector('.loading').style.display = 'none';
         document.querySelector('.sent-message').style.display = 'block';
+
+        // Clear the input fields after success
+        document.getElementById("name-field").value = '';
+        document.getElementById("email-field").value = '';
+        document.getElementById("subject-field").value = '';
+        document.getElementById("message-field").value = '';
 
         // Hide success message after 5 seconds
         setTimeout(function() {
