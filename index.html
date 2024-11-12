@@ -548,12 +548,53 @@
 
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"> </script>
   <script type="text/javascript">
+
+function validateForm() {
+        const name = document.getElementById("name-field").value.trim();
+        const email = document.getElementById("email-field").value.trim();
+        const subject = document.getElementById("subject-field").value.trim();
+        const message = document.getElementById("message-field").value.trim();
+        const errorMessage = document.querySelector('.error-message');
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        errorMessage.style.backgroundColor = 'red'; 
+        errorMessage.style.color = 'white'; 
+        errorMessage.style.textAlign = 'center';
+        errorMessage.style.padding = '10px'; 
+
+        if (!name) {
+            errorMessage.textContent = "Name is required.";
+            errorMessage.style.display = 'block';
+            return false;
+        }
+        if (!email || !emailPattern.test(email)) {
+            errorMessage.textContent = "Valid email is required.";
+            errorMessage.style.display = 'block';
+            return false;
+        }
+        if (!subject) {
+            errorMessage.textContent = "Subject is required.";
+            errorMessage.style.display = 'block';
+            return false;
+        }
+        if (!message) {
+            errorMessage.textContent = "Message is required.";
+            errorMessage.style.display = 'block';
+            return false;
+        }
+
+        errorMessage.style.display = 'none';
+        return true;
+    }
     (function(){
         emailjs.init({
           publicKey: "d5fjb6-DylxArxgUL",
         });
     })();
     function sendMail() {
+      if (!validateForm()) {
+            return;
+        }
 
       document.querySelector('.loading').style.display = 'block';
       document.querySelector('.error-message').style.display = 'none';
